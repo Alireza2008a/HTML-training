@@ -1,0 +1,2864 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 آموزش HTML پیشرفته - تعاملی و مدرن</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'Inter', 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(1deg); }
+            66% { transform: translateY(10px) rotate(-1deg); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow:
+                0 25px 50px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            animation: containerFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes containerFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .header {
+            background: linear-gradient(135deg,
+                rgba(255, 107, 107, 0.9) 0%,
+                rgba(78, 205, 196, 0.9) 50%,
+                rgba(120, 119, 198, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: headerShine 3s ease-in-out infinite;
+        }
+
+        @keyframes headerShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            100% { transform: translateX(200%) translateY(200%) rotate(45deg); }
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #fff, #f0f0f0, #fff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textShimmer 2s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255,255,255,0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes textShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .header p {
+            margin: 20px 0 0 0;
+            font-size: 1.4rem;
+            opacity: 0.95;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .nav-container {
+            position: relative;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-tabs {
+            display: flex;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            position: relative;
+        }
+
+        .nav-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 20px 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            position: relative;
+            border-radius: 0;
+            overflow: hidden;
+        }
+
+        .tab-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(78, 205, 196, 0.1), rgba(255, 107, 107, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tab-button:hover::before {
+            opacity: 1;
+        }
+
+        .tab-button:hover {
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .tab-button.active {
+            color: #4ecdc4;
+            background: rgba(78, 205, 196, 0.1);
+            box-shadow: inset 0 -3px 0 #4ecdc4;
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #4ecdc4, #ff6b6b);
+            animation: tabIndicator 0.5s ease forwards;
+        }
+
+        @keyframes tabIndicator {
+            to {
+                width: 100%;
+                left: 0;
+            }
+        }
+
+        .content {
+            padding: 50px;
+            min-height: 80vh;
+        }
+
+        .lesson {
+            display: none;
+            animation: lessonSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .lesson.active {
+            display: block;
+        }
+
+        @keyframes lessonSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .progress-container {
+            padding: 30px 50px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(30, 30, 60, 0.3));
+            backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(78, 205, 196, 0.1), transparent);
+            animation: progressContainerSweep 4s ease-in-out infinite;
+        }
+
+        @keyframes progressContainerSweep {
+            0%, 100% { left: -100%; }
+            50% { left: 100%; }
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-stats {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .progress-stat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .progress-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            background: linear-gradient(45deg, #4ecdc4, #ff6b6b);
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(78, 205, 196, 0.4); }
+            50% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(78, 205, 196, 0); }
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.08);
+            height: 12px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow:
+                inset 0 2px 4px rgba(0, 0, 0, 0.3),
+                0 1px 0 rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), transparent);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg,
+                #4ecdc4 0%,
+                #44a08d 25%,
+                #ff6b6b 50%,
+                #e55353 75%,
+                #7b68ee 100%);
+            background-size: 300% 100%;
+            height: 100%;
+            width: 0%;
+            transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            animation: progressFlow 3s ease-in-out infinite;
+            position: relative;
+            border-radius: 20px;
+            box-shadow:
+                0 0 20px rgba(78, 205, 196, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .progress-fill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), transparent);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -30px;
+            width: 30px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: progressShine 2s ease-in-out infinite;
+            border-radius: 0 20px 20px 0;
+        }
+
+        @keyframes progressFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes progressShine {
+            0% { transform: translateX(-60px); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translateX(60px); opacity: 0; }
+        }
+
+        .progress-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .progress-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #4ecdc4;
+            border-radius: 50%;
+            animation: particleMove 4s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes particleMove {
+            0% {
+                transform: translateX(-10px) translateY(0px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateX(calc(100vw + 10px)) translateY(-20px);
+                opacity: 0;
+            }
+        }
+
+        .lesson h2 {
+            color: #ffffff;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .lesson h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #4ecdc4, #ff6b6b);
+            border-radius: 2px;
+        }
+
+        .lesson h3 {
+            color: #4ecdc4;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin: 40px 0 20px 0;
+            position: relative;
+            padding-right: 20px;
+        }
+
+        .lesson h3::before {
+            content: '▶';
+            position: absolute;
+            right: 0;
+            color: #ff6b6b;
+            font-size: 0.8em;
+        }
+
+        .code-example {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e2e8f0;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+            overflow-x: auto;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            position: relative;
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .code-example::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #7b68ee);
+            background-size: 200% 100%;
+            animation: codeHeaderGlow 3s ease-in-out infinite;
+        }
+
+        .code-example::after {
+            content: '< / >';
+            position: absolute;
+            top: 2px;
+            right: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        @keyframes codeHeaderGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .code-content {
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .code-example .tag {
+            color: #81c784;
+        }
+
+        .code-example .attr {
+            color: #ffb74d;
+        }
+
+        .code-example .value {
+            color: #f48fb1;
+        }
+
+        .code-example .comment {
+            color: #90a4ae;
+            font-style: italic;
+        }
+
+        .live-demo {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .live-demo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #4ecdc4, #ff6b6b, #7b68ee);
+            background-size: 200% 100%;
+            animation: demoGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes demoGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .live-demo h4 {
+            margin: 0 0 20px 0;
+            color: #4ecdc4;
+            font-size: 1.3rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .live-demo h4::before {
+            content: '🎯';
+            font-size: 1.2em;
+        }
+
+        .tip {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 235, 59, 0.1));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tip::before {
+            content: '💡';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+        }
+
+        .tip strong {
+            color: #ffc107;
+            font-weight: 600;
+        }
+
+        .exercise {
+            background: linear-gradient(135deg, rgba(23, 162, 184, 0.1), rgba(32, 201, 151, 0.1));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(23, 162, 184, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exercise::before {
+            content: '📝';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+        }
+
+        .exercise h4 {
+            color: #17a2b8;
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .try-button {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            margin: 15px 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(78, 205, 196, 0.3);
+        }
+
+        .try-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .try-button:hover::before {
+            left: 100%;
+        }
+
+        .try-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.5);
+        }
+
+        .try-button:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .interactive-element {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .interactive-element:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(78, 205, 196, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .skill-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #4ecdc4, #ff6b6b);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 5px;
+            animation: badgeFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes badgeFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 6px;
+            border-radius: 3px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        ul, ol {
+            padding-right: 20px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.3), rgba(255, 107, 107, 0.3));
+            color: #ffffff;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-weight: 700;
+            border: 1px solid rgba(78, 205, 196, 0.5);
+        }
+
+        .lesson-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 50px 0 20px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(255, 107, 107, 0.1));
+            border-radius: 20px;
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .prev-lesson-btn, .next-lesson-btn, .completion-btn {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(78, 205, 196, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        .prev-lesson-btn {
+            background: linear-gradient(135deg, #6c757d, #495057);
+            box-shadow: 0 5px 20px rgba(108, 117, 125, 0.3);
+        }
+
+        .completion-btn {
+            background: linear-gradient(135deg, #ff6b6b, #e55353);
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+            font-size: 1.1rem;
+            padding: 18px 30px;
+        }
+
+        .prev-lesson-btn::before, .next-lesson-btn::before, .completion-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .prev-lesson-btn:hover::before, .next-lesson-btn:hover::before, .completion-btn:hover::before {
+            left: 100%;
+        }
+
+        .prev-lesson-btn:hover, .next-lesson-btn:hover, .completion-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(78, 205, 196, 0.5);
+        }
+
+        .prev-lesson-btn:hover {
+            box-shadow: 0 10px 30px rgba(108, 117, 125, 0.5);
+        }
+
+        .completion-btn:hover {
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.6);
+        }
+
+        .nav-arrow {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .prev-lesson-btn:hover .nav-arrow {
+            transform: translateX(5px);
+        }
+
+        .next-lesson-btn:hover .nav-arrow {
+            transform: translateX(-5px);
+        }
+
+        .completion-btn:hover .nav-arrow {
+            animation: bounce 0.6s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 25px;
+            }
+
+            .header {
+                padding: 30px 20px;
+                background: linear-gradient(135deg,
+                    rgba(255, 107, 107, 0.95) 0%,
+                    rgba(78, 205, 196, 0.95) 50%,
+                    rgba(120, 119, 198, 0.95) 100%);
+            }
+
+            .header h1 {
+                font-size: 2.2rem;
+                line-height: 1.2;
+                margin-bottom: 15px;
+            }
+
+            .header p {
+                font-size: 1.1rem;
+                margin: 15px 0;
+            }
+
+            .header-stats {
+                flex-direction: column;
+                gap: 15px;
+                margin-top: 25px;
+            }
+
+            .stat-item {
+                padding: 12px 20px;
+                border-radius: 12px;
+                min-width: 120px;
+            }
+
+            .progress-container {
+                padding: 20px;
+            }
+
+            .progress-info {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+
+            .progress-stats {
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .progress-stat {
+                font-size: 0.85rem;
+            }
+
+            .nav-container {
+                background: rgba(0, 0, 0, 0.4);
+            }
+
+            .nav-tabs {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scrollbar-width: thin;
+                scrollbar-color: #4ecdc4 transparent;
+                padding: 5px 0;
+            }
+
+            .nav-tabs::-webkit-scrollbar {
+                height: 3px;
+            }
+
+            .nav-tabs::-webkit-scrollbar-track {
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+            }
+
+            .nav-tabs::-webkit-scrollbar-thumb {
+                background: linear-gradient(90deg, #4ecdc4, #ff6b6b);
+                border-radius: 10px;
+            }
+
+            .tab-button {
+                padding: 15px 20px;
+                font-size: 0.9rem;
+                min-width: 120px;
+                white-space: nowrap;
+                border-radius: 12px;
+                margin: 0 2px;
+            }
+
+            .tab-button.active {
+                background: linear-gradient(135deg, rgba(78, 205, 196, 0.2), rgba(255, 107, 107, 0.2));
+                box-shadow: 0 3px 15px rgba(78, 205, 196, 0.3);
+                transform: translateY(-2px);
+            }
+
+            .content {
+                padding: 25px 20px;
+            }
+
+            .lesson h2 {
+                font-size: 2rem;
+                margin-bottom: 25px;
+                text-align: center;
+                line-height: 1.3;
+            }
+
+            .lesson h3 {
+                font-size: 1.4rem;
+                margin: 30px 0 15px 0;
+                text-align: center;
+            }
+
+            .lesson p {
+                font-size: 1.05rem;
+                line-height: 1.7;
+                margin-bottom: 20px;
+            }
+
+            .code-example {
+                padding: 20px 15px;
+                border-radius: 15px;
+                margin: 25px 0;
+                font-size: 0.85rem;
+                overflow-x: auto;
+            }
+
+            .live-demo {
+                padding: 20px 15px;
+                border-radius: 15px;
+                margin: 25px 0;
+            }
+
+            .live-demo h4 {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+            }
+
+            .interactive-element {
+                padding: 20px 15px;
+                border-radius: 12px;
+                margin: 20px 0;
+                text-align: center;
+            }
+
+            .interactive-element h4 {
+                font-size: 1.1rem;
+                margin-bottom: 10px;
+            }
+
+            .tip, .exercise {
+                padding: 20px 15px;
+                border-radius: 12px;
+                margin: 20px 0;
+            }
+
+            .tip::before, .exercise::before {
+                top: 12px;
+                right: 15px;
+                font-size: 1.3rem;
+            }
+
+            .skill-badge {
+                padding: 10px 15px;
+                border-radius: 25px;
+                font-size: 0.85rem;
+                margin: 8px 5px;
+                display: inline-block;
+            }
+
+            .try-button {
+                padding: 15px 25px;
+                font-size: 1rem;
+                border-radius: 25px;
+                margin: 15px 5px;
+                min-width: 200px;
+            }
+
+            .lesson-navigation {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+                padding: 20px 15px;
+                border-radius: 15px;
+                margin: 40px 0 20px 0;
+            }
+
+            .prev-lesson-btn, .next-lesson-btn, .completion-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 18px 25px;
+                font-size: 1rem;
+                border-radius: 25px;
+                box-shadow: 0 8px 25px rgba(78, 205, 196, 0.3);
+            }
+
+            .prev-lesson-btn {
+                order: 2;
+                box-shadow: 0 8px 25px rgba(108, 117, 125, 0.3);
+            }
+
+            .next-lesson-btn, .completion-btn {
+                order: 1;
+            }
+
+            .completion-btn {
+                font-size: 1.1rem;
+                padding: 20px 30px;
+                box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+            }
+
+            /* Mobile-specific animations */
+            .lesson.active {
+                animation: mobileSlideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
+
+            @keyframes mobileSlideIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px) scale(0.98);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+
+            /* Enhanced mobile table styling */
+            table {
+                font-size: 0.9rem;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            th, td {
+                padding: 12px 8px !important;
+                text-align: center;
+            }
+
+            /* Mobile form improvements */
+            form {
+                background: rgba(255, 255, 255, 0.05);
+                padding: 20px;
+                border-radius: 15px;
+                backdrop-filter: blur(10px);
+            }
+
+            input, textarea, select {
+                font-size: 16px !important; /* Prevents zoom on iOS */
+                border-radius: 10px !important;
+                border: 2px solid rgba(78, 205, 196, 0.3) !important;
+                background: rgba(255, 255, 255, 0.9) !important;
+                color: #333 !important;
+                transition: all 0.3s ease !important;
+            }
+
+            input:focus, textarea:focus, select:focus {
+                border-color: #4ecdc4 !important;
+                box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.2) !important;
+                outline: none !important;
+            }
+
+            label {
+                font-weight: 600;
+                color: #fff;
+                margin-bottom: 8px;
+                display: block;
+            }
+
+            /* Mobile certificate modal */
+            .certificate-content {
+                width: 95%;
+                margin: 5% auto;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            .certificate {
+                padding: 20px 15px;
+            }
+
+            .certificate-border {
+                padding: 20px 15px;
+                border-width: 4px;
+            }
+
+            .certificate-title {
+                font-size: 1.8rem;
+                line-height: 1.2;
+            }
+
+            .certificate-name {
+                font-size: 1.6rem;
+                min-width: 250px;
+                padding: 12px;
+            }
+
+            .certificate-course {
+                font-size: 1.3rem;
+                line-height: 1.3;
+            }
+
+            .certificate-skills {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .skill-item {
+                padding: 12px 15px;
+                font-size: 0.9rem;
+            }
+
+            .certificate-footer {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .signature-line {
+                margin: 0 auto;
+            }
+
+            .cert-button {
+                display: block;
+                margin: 10px auto;
+                width: 80%;
+                max-width: 250px;
+                padding: 15px 20px;
+                font-size: 0.95rem;
+            }
+
+            /* Mobile touch improvements */
+            .tab-button, .try-button, .prev-lesson-btn, .next-lesson-btn, .completion-btn {
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+            }
+
+            /* Mobile scroll improvements */
+            .content {
+                scroll-behavior: smooth;
+            }
+
+            /* Mobile-specific utility classes */
+            .mobile-center {
+                text-align: center;
+            }
+
+            .mobile-full-width {
+                width: 100%;
+            }
+
+            /* Enhanced mobile grid layouts */
+            .header-stats {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 10px;
+                justify-items: center;
+            }
+
+            /* Mobile notification improvements */
+            .achievement-notification {
+                left: 10px !important;
+                right: 10px !important;
+                width: auto !important;
+                max-width: none !important;
+            }
+        }
+
+        /* Extra small devices (phones in portrait) */
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .lesson h2 {
+                font-size: 1.7rem;
+            }
+
+            .lesson h3 {
+                font-size: 1.2rem;
+            }
+
+            .tab-button {
+                min-width: 100px;
+                padding: 12px 15px;
+                font-size: 0.85rem;
+            }
+
+            .code-example {
+                font-size: 0.8rem;
+                padding: 15px 10px;
+            }
+
+            .certificate-title {
+                font-size: 1.5rem;
+            }
+
+            .certificate-name {
+                font-size: 1.4rem;
+                min-width: 200px;
+            }
+
+            .certificate-course {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🚀 آموزش HTML پیشرفته</h1>
+            <p>تعاملی، مدرن و حرفه‌ای - از مبتدی تا متخصص</p>
+
+            <div class="header-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="lessonCount">8</span>
+                    <span class="stat-label">درس</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="exampleCount">25+</span>
+                    <span class="stat-label">مثال</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="timeEstimate">3</span>
+                    <span class="stat-label">ساعت</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-particles" id="progressParticles"></div>
+            <div class="progress-info">
+                <span>پیشرفت دوره</span>
+                <div class="progress-stats">
+                    <div class="progress-stat">
+                        <div class="progress-icon">📚</div>
+                        <span id="progressText">درس ۱ از ۸</span>
+                    </div>
+                    <div class="progress-stat">
+                        <div class="progress-icon">⏱️</div>
+                        <span id="timeSpent">۰ دقیقه</span>
+                    </div>
+                    <div class="progress-stat">
+                        <div class="progress-icon">🎯</div>
+                        <span id="progressPercent">۱۲٪</span>
+                    </div>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+        </div>
+
+        <div class="nav-container">
+            <div class="nav-tabs">
+                <button class="tab-button active" onclick="showLesson(0)">🏠 مقدمه</button>
+                <button class="tab-button" onclick="showLesson(1)">🏗️ ساختار</button>
+                <button class="tab-button" onclick="showLesson(2)">📝 متن</button>
+                <button class="tab-button" onclick="showLesson(3)">📋 لیست‌ها</button>
+                <button class="tab-button" onclick="showLesson(4)">🔗 لینک‌ها</button>
+                <button class="tab-button" onclick="showLesson(5)">📊 جداول</button>
+                <button class="tab-button" onclick="showLesson(6)">📝 فرم‌ها</button>
+                <button class="tab-button" onclick="showLesson(7)">🎯 پیشرفته</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- درس 1: مقدمه -->
+            <div class="lesson active">
+                <h2>🚀 HTML چیست؟</h2>
+                <p style="font-size: 1.2rem; color: rgba(255,255,255,0.9); margin-bottom: 30px;"><strong>HTML</strong> مخفف <span class="highlight">HyperText Markup Language</span> است. این زبان برای ساخت صفحات وب استفاده می‌شود و پایه و اساس تمام وب‌سایت‌های دنیا محسوب می‌شود.</p>
+
+                <div class="interactive-element" onclick="toggleFeatures()">
+                    <h3>🎯 ویژگی‌های HTML (کلیک کنید)</h3>
+                    <div id="htmlFeatures" style="display: none;">
+                        <div class="skill-badge">🏗️ ساختار دهنده</div>
+                        <div class="skill-badge">🔗 پیوند دهنده</div>
+                        <div class="skill-badge">📱 چندرسانه‌ای</div>
+                        <div class="skill-badge">🌐 استاندارد جهانی</div>
+                        <div class="skill-badge">♿ دسترسی‌پذیر</div>
+                        <div class="skill-badge">🔍 SEO دوست</div>
+                    </div>
+                </div>
+
+                <div class="tip">
+                    <strong>نکته حرفه‌ای:</strong> HTML5 امروزه استاندارد مدرن وب است و قابلیت‌های پیشرفته‌ای مثل Semantic Elements، Canvas، و Web APIs را ارائه می‌دهد.
+                </div>
+
+                <h3>🔧 مفاهیم کلیدی</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0;">
+                    <div class="interactive-element">
+                        <h4 style="color: #4ecdc4; margin-bottom: 10px;">🏷️ تگ (Tag)</h4>
+                        <p>دستورات HTML که با &lt; و &gt; نوشته می‌شوند</p>
+                        <code style="background: rgba(78,205,196,0.2); padding: 5px 10px; border-radius: 5px;">&lt;h1&gt;</code>
+                    </div>
+                    <div class="interactive-element">
+                        <h4 style="color: #ff6b6b; margin-bottom: 10px;">📦 المان (Element)</h4>
+                        <p>تگ باز + محتوا + تگ بسته</p>
+                        <code style="background: rgba(255,107,107,0.2); padding: 5px 10px; border-radius: 5px;">&lt;h1&gt;عنوان&lt;/h1&gt;</code>
+                    </div>
+                    <div class="interactive-element">
+                        <h4 style="color: #7b68ee; margin-bottom: 10px;">⚙️ ویژگی (Attribute)</h4>
+                        <p>اطلاعات اضافی درون تگ</p>
+                        <code style="background: rgba(123,104,238,0.2); padding: 5px 10px; border-radius: 5px;">class="header"</code>
+                    </div>
+                </div>
+
+                <div class="live-demo">
+                    <h4>نمونه تعاملی HTML</h4>
+                    <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; margin: 15px 0;">
+                        <div style="color: #4ecdc4; font-family: monospace;">&lt;h1 <span style="color: #ff6b6b;">class="title"</span>&gt;</div>
+                        <div style="color: #fff; margin: 10px 20px;">سلام دنیای HTML!</div>
+                        <div style="color: #4ecdc4; font-family: monospace;">&lt;/h1&gt;</div>
+                    </div>
+                    <div style="border: 2px solid #4ecdc4; padding: 15px; border-radius: 10px; background: rgba(78,205,196,0.1);">
+                        <h1 style="color: #4ecdc4; margin: 0; text-align: center;">سلام دنیای HTML!</h1>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 40px 0;">
+                    <button class="try-button" onclick="showLesson(1)">🚀 شروع یادگیری</button>
+                </div>
+
+                <div class="lesson-navigation">
+                    <button class="next-lesson-btn" onclick="showLesson(1)">
+                        درس بعدی: ساختار پایه HTML
+                        <span class="nav-arrow">←</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- درس 2: ساختار پایه -->
+            <div class="lesson">
+                <h2>🏗️ ساختار پایه HTML</h2>
+                <p>هر صفحه HTML باید ساختار مشخصی داشته باشد:</p>
+
+                <div class="code-example">
+                    <div class="code-content">
+<span class="comment">&lt;!-- اعلام نوع سند --&gt;</span>
+<span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="value">"fa"</span> <span class="attr">dir</span>=<span class="value">"rtl"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="comment">&lt;!-- اطلاعات صفحه --&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="value">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>عنوان صفحه<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+    <span class="comment">&lt;!-- محتوای قابل مشاهده --&gt;</span>
+    <span class="tag">&lt;h1&gt;</span>سلام دنیا!<span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+                    </div>
+                </div>
+
+                <h3>توضیح هر بخش:</h3>
+                <ul>
+                    <li><strong>&lt;!DOCTYPE html&gt;:</strong> نوع سند HTML5 را مشخص می‌کند</li>
+                    <li><strong>&lt;html&gt;:</strong> ریشه سند، شامل تمام محتوا</li>
+                    <li><strong>&lt;head&gt;:</strong> اطلاعات صفحه (غیرقابل مشاهده)</li>
+                    <li><strong>&lt;body&gt;:</strong> محتوای اصلی صفحه (قابل مشاهده)</li>
+                </ul>
+
+                <div class="live-demo">
+                    <h4>🎯 نمونه زنده:</h4>
+                    <h1 style="color: #4ecdc4; margin: 0;">سلام دنیا!</h1>
+                    <p>این اولین صفحه HTML من است.</p>
+                </div>
+
+                <div class="exercise">
+                    <h4>📝 تمرین:</h4>
+                    <p>یک صفحه HTML با عنوان "صفحه من" و یک پیام خوشامدگویی بسازید.</p>
+                </div>
+
+                <div class="lesson-navigation">
+                    <button class="prev-lesson-btn" onclick="showLesson(0)">
+                        <span class="nav-arrow">→</span>
+                        درس قبلی: مقدمه
+                    </button>
+                    <button class="next-lesson-btn" onclick="showLesson(2)">
+                        درس بعدی: تگ‌های متنی
+                        <span class="nav-arrow">←</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- درس 3: تگ‌های متنی -->
+            <div class="lesson">
+                <h2>📝 تگ‌های متنی</h2>
+                <p>برای نمایش و قالب‌بندی متن از تگ‌های مختلفی استفاده می‌شود:</p>
+
+                <h3>سرتیترها (Headings):</h3>
+                <div class="code-example">
+<span class="tag">&lt;h1&gt;</span>سرتیتر اصلی<span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;h2&gt;</span>سرتیتر فرعی<span class="tag">&lt;/h2&gt;</span>
+<span class="tag">&lt;h3&gt;</span>سرتیتر سطح سوم<span class="tag">&lt;/h3&gt;</span>
+<span class="comment">&lt;!-- تا h6 ادامه دارد --&gt;</span>
+                </div>
+
+                <div class="live-demo">
+                    <h4>🎯 نمونه زنده:</h4>
+                    <h1 style="margin: 5px 0; font-size: 1.8rem;">سرتیتر اصلی</h1>
+                    <h2 style="margin: 5px 0; font-size: 1.4rem;">سرتیتر فرعی</h2>
+                    <h3 style="margin: 5px 0; font-size: 1.2rem;">سرتیتر سطح سوم</h3>
+                </div>
+
+                <h3>قالب‌بندی متن:</h3>
+                <div class="code-example">
+<span class="tag">&lt;p&gt;</span>پاراگراف معمولی<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;strong&gt;</span>متن پررنگ<span class="tag">&lt;/strong&gt;</span>
+<span class="tag">&lt;em&gt;</span>متن تاکیدی<span class="tag">&lt;/em&gt;</span>
+<span class="tag">&lt;br&gt;</span> <span class="comment">&lt;!-- شکست خط --&gt;</span>
+<span class="tag">&lt;hr&gt;</span> <span class="comment">&lt;!-- خط جداکننده --&gt;</span>
+                </div>
+
+                <div class="live-demo">
+                    <h4>🎯 نمونه زنده:</h4>
+                    <p>این یک پاراگراف معمولی است.</p>
+                    <p><strong>این متن پررنگ است</strong> و <em>این متن تاکیدی است</em>.</p>
+                    <hr style="margin: 10px 0;">
+                    <p>خط بالا جداکننده است.</p>
+                </div>
+
+                <div class="tip">
+                    <strong>💡 نکته:</strong> از &lt;strong&gt; و &lt;em&gt; به جای &lt;b&gt; و &lt;i&gt; استفاده کنید چون معنای بیشتری دارند.
+                </div>
+
+                <div class="lesson-navigation">
+                    <button class="prev-lesson-btn" onclick="showLesson(1)">
+                        <span class="nav-arrow">→</span>
+                        درس قبلی: ساختار پایه
+                    </button>
+                    <button class="next-lesson-btn" onclick="showLesson(3)">
+                        درس بعدی: لیست‌ها
+                        <span class="nav-arrow">←</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- درس 4: لیست‌ها -->
+            <div class="lesson">
+                <h2>📋 لیست‌ها</h2>
+                <p>برای نمایش فهرست‌ها از سه نوع لیست استفاده می‌شود:</p>
+
+                <h3>لیست نامرتب (Unordered List):</h3>
+                <div class="code-example">
+<span class="tag">&lt;ul&gt;</span>
+    <span class="tag">&lt;li&gt;</span>مورد اول<span class="tag">&lt;/li&gt;</span>
+    <span class="tag">&lt;li&gt;</span>مورد دوم<span class="tag">&lt;/li&gt;</span>
+    <span class="tag">&lt;li&gt;</span>مورد سوم<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ul&gt;</span>
+                </div>
+
+                <h3>لیست مرتب (Ordered List):</h3>
+                <div class="code-example">
+<span class="tag">&lt;ol&gt;</span>
+    <span class="tag">&lt;li&gt;</span>قدم اول<span class="tag">&lt;/li&gt;</span>
+    <span class="tag">&lt;li&gt;</span>قدم دوم<span class="tag">&lt;/li&gt;</span>
+    <span class="tag">&lt;li&gt;</span>قدم سوم<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ol&gt;</span>
+                </div>
+
+                <div class="live-demo">
+                    <h4>🎯 نمونه زنده:</h4>
+                    <p><strong>لیست خرید:</strong></p>
+                    <ul style="margin: 10px 0;">
+                        <li>نان</li>
+                        <li>شیر</li>
+                        <li>تخم مرغ</li>
+                    </ul>
+
+                    <p><strong>دستور پخت:</strong></p>
+                    <ol style="margin: 10px 0;">
+                        <li>مواد را آماده کنید</li>
+                        <li>در تابه بریزید</li>
+                        <li>15 دقیقه بپزید</li>
+                    </ol>
+                </div>
+
+                <h3>لیست تعریف (Definition List):</h3>
+                <div class="code-example">
+<span class="tag">&lt;dl&gt;</span>
+    <span class="tag">&lt;dt&gt;</span>HTML<span class="tag">&lt;/dt&gt;</span>
+    <span class="tag">&lt;dd&gt;</span>زبان نشانه‌گذاری صفحات وب<span class="tag">&lt;/dd&gt;</span>
+    <span class="tag">&lt;dt&gt;</span>CSS<span class="tag">&lt;/dt&gt;</span>
+    <span class="tag">&lt;dd&gt;</span>زبان طراحی صفحات وب<span class="tag">&lt;/dd&gt;</span>
+<span class="tag">&lt;/dl&gt;</span>
+                </div>
+
+                <div class="exercise">
+                    <h4>📝 تمرین:</h4>
+                    <p>یک لیست از علایق خود بسازید و یک لیست مرتب از اولویت‌هایتان.</p>
+                </div>
+
+                <div class="lesson-navigation">
+                    <button class="prev-lesson-btn" onclick="showLesson(2)">
+                        <span class="nav-arrow">→</span>
+                        درس قبلی: تگ‌های متنی
+                    </button>
+                    <button class="next-lesson-btn" onclick="showLesson(4)">
+                        درس بعدی: لینک‌ها و تصاویر
+                        <span class="nav-arrow">←</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- درس 5: لینک و تصاویر -->
+            <div class="lesson">
+                <h2>🔗 لینک‌ها و تصاویر</h2>
+
+                <h3>لینک‌ها (Links):</h3>
+                <div class="code-example">
+<span class="comment">&lt;!-- لینک به سایت خارجی --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="value">"https://www.google.com"</span> <span class="attr">target</span>=<span class="value">"_blank"</span><span class="tag">&gt;</span>گوگل<span class="tag">&lt;/a&gt;</span>
+
+<span class="comment">&lt;!-- لینک به بخش دیگر همین صفحه --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="value">"#section1"</span><span class="tag">&gt;</span>برو به بخش 1<span class="tag">&lt;/a&gt;</span>
+
+<span class="comment">&lt;!-- لینک ایمیل --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="value">"mailto:test@example.com"</span><span class="tag">&gt;</span>ایمیل بفرست<span class="tag">&lt;/a&gt;</span>
+                </div>
+
+                <div class="live-demo">
+                    <h4>🎯 نمونه زنده:</h4>
+                    <p>
+                        <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" style="color: #4ecdc4; text-decoration: none; font-weight: 600;">🔍 جستجو در گوگل</a>
+                    </p>
+                    <p>
+                        <a href="mailto:test@example.com" style="color: #ff6b6b; text-decoration: none; font-weight: 600;">📧 ارسال ایمیل</a>
+                    </p>
+                </div>
+
+                <h3>ویژگی‌های مهم لینک:</h3>
+                <ul>
+                    <li><strong>href:</strong> آدرس مقصد</li>
+                    <li><strong>target="_blank":</strong> باز کردن در تب جدید</li>
+                    <li><strong>title:</strong> توضیح هنگام hover</li>
+                </ul>
+
+                <h3>تصاویر:</h3>
+                <div class="code-example">
+<span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="value">"image.jpg"</span>
+     <span class="attr">alt</span>=<span class="value">"توضیح تصویر"</span>
+     <span class="attr">width</span>=<span class="value">"300"</span>
+     <span class="attr">height</span>=<span class="value">"200"</span><span class="tag">&gt;</span>
+                </div>
+
+                <div class="live-demo">
+                    <h4>🎯 نمونه تصویر SVG:</h4>
+                    <svg width="200" height="100" style="border: 2px solid #4ecdc4; border-radius: 10px;">
+                        <rect width="200" height="100" fill="#f0f8ff"/>
+                        <circle cx="100" cy="50" r="30" fill="#4ecdc4"/>
+                        <text x="100" y="85" text-anchor="middle" fill="#333" font-size="12">نمونه تصویر</text>
+                    </svg>
+                </div>
+
+                <div class="tip">
+                    <strong>💡 نکته مهم:</strong> همیشه ویژگی alt برای تصاویر بنویسید. این برای دسترسی‌پذیری مهم است.
+                </div>
+
+                <div class="lesson-navigation">
+                    <button class="prev-lesson-btn" onclick="showLesson(3)">
+                        <span class="nav-arrow">→</span>
+                        درس قبلی: لیست‌ها
+                    </button>
+                    <button class="next-lesson-btn" onclick="showLesson(5)">
+                        درس بعدی: جداول
+                        <span class="nav-arrow">←</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- درس 6: جداول -->
+            <div class="lesson">
+                <h2>📊 جداول</h2>
+                <p>برای نمایش داده‌های جدولی از تگ‌های table استفاده می‌شود:</p>
+
+                <div class="code-example">
+<span class="tag">&lt;table&gt;</span>
+    <span class="tag">&lt;thead&gt;</span>
+        <span class="tag">&lt;tr&gt;</span>
+            <span class="tag">&lt;th&gt;</span>نام<span class="tag">&lt;/th&gt;</span>
+            <span class="tag">&lt;th&gt;</span>سن<span class="tag">&lt;/th&gt;</span>
+            <span class="tag">&lt;th&gt;</span>شهر<span class="tag">&lt;/th&gt;</span>
+        <span class="tag">&lt;/tr&gt;</span>
+    <span class="tag">&lt;/thead&gt;</span>
+    <span class="tag">&lt;tbody&gt;</span>
+        <span class="tag">&lt;tr&gt;</span>
+            <span class="tag">&lt;td&gt;</span>علی<span class="tag">&lt;/td&gt;</span>
+            <span class="tag">&lt;td&gt;</span>25<span class="tag">&lt;/td&gt;</span>
+            <span class="tag">&lt;td&gt;</span>تهران<span class="tag">&lt;/td&gt;</span>
+        <span class="tag">&lt;/tr&gt;</span>
+    <span class="tag">&lt;/tbody&gt;</span>
+<span class="tag">&lt;/table&gt;</span>
+                </div>
+
+                <div class="live-demo">
+                    <h4>🎯 نمونه زنده:</h4>
+                    <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+                        <thead>
+                            <tr style="background: #4ecdc4; color: white;">
+                                <th style="padding: 12px; border: 1px solid #ddd;">نام</th>
+                                <th style="padding: 12px; border: 1px solid #ddd;">سن</th>
+                                <th style="padding: 12px; border: 1px solid #ddd;">شهر</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 10px; border: 1px solid #ddd;">علی</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">25</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">تهران</td>
+                            </tr>
+                            <tr style="background: #f8f9fa;">
+                                <td style="padding: 10px; border: 1px solid #ddd;">سارا</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">22</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">اصفهان</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>اجزای جدول:</h3>
+                <ul>
+                    <li><strong>&lt;table&gt;:</strong> کانتینر اصلی جدول</li>
+                    <li><strong>&lt;thead&gt;:</strong> سربرگ جدول</li>
+                    <li><strong>&lt;tbody&gt;:</strong> بدنه جدول</li>
+                    <li><strong>&lt;tr&gt;:</strong> ردیف جدول</li>
+                    <li><strong>&lt;th&gt;:</strong> سلول سربرگ</li>
+                    <li><strong>&lt;td&gt;:</strong> سلول داده</li>
+                </ul>
+
+                <div class="exercise">
+                    <h4>📝 تمرین:</h4>
+                    <p>جدولی برای نمایش نمرات درس‌هایتان بسازید.</p>
+                </div>
+
+                <div class="lesson-navigation">
+                    <button class="prev-lesson-btn" onclick="showLesson(4)">
+                        <span class="nav-arrow">→</span>
+                        درس قبلی: لینک‌ها و تصاویر
+                    </button>
+                    <button class="next-lesson-btn" onclick="showLesson(6)">
+                        درس بعدی: فرم‌ها
+                        <span class="nav-arrow">←</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- درس 7: فرم‌ها -->
+            <div class="lesson">
+                <h2>📝 فرم‌ها</h2>
+                <p>فرم‌ها برای دریافت اطلاعات از کاربر استفاده می‌شوند:</p>
+
+                <div class="code-example">
+<span class="tag">&lt;form&gt;</span>
+    <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="value">"name"</span><span class="tag">&gt;</span>نام:<span class="tag">&lt;/label&gt;</span>
+    <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="value">"text"</span> <span class="attr">id</span>=<span class="value">"name"</span> <span class="attr">name</span>=<span class="value">"name"</span><span class="tag">&gt;</span>
+
+    <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="value">"email"</span><span class="tag">&gt;</span>ایمیل:<span class="tag">&lt;/label&gt;</span>
+    <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="value">"email"</span> <span class="attr">id</span>=<span class="value">"email"</span> <span class="attr">name</span>=<span class="value">"email"</span><span class="tag">&gt;</span>
+
+    <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="value">"submit"</span><span class="tag">&gt;</span>ارسال<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;/form&gt;</span>
+                </div>
+
+                <div class="live-demo">
+                    <h4>🎯 نمونه زنده:</h4>
+                    <form style="max-width: 400px;" onsubmit="handleFormSubmit(event)">
+                        <div style="margin: 15px 0;">
+                            <label for="demoName" style="display: block; margin-bottom: 5px; font-weight: 600;">نام:</label>
+                            <input type="text" id="demoName" name="name" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 1rem;">
+                        </div>
+                        <div style="margin: 15px 0;">
+                            <label for="demoEmail" style="display: block; margin-bottom: 5px; font-weight: 600;">ایمیل:</label>
+                            <input type="email" id="demoEmail" name="email" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 1rem;">
+                        </div>
+                        <div style="margin: 15px 0;">
+                            <label for="demoMessage" style="display: block; margin-bottom: 5px; font-weight: 600;">پیام:</label>
+                            <textarea id="demoMessage" name="message" rows="3" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 1rem; resize: vertical;"></textarea>
+                        </div>
+                        <button type="submit" style="background: #4ecdc4; color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 1rem; font-weight: 600;">ارسال فرم</button>
+                    </form>
+                    <div id="formResult" style="margin-top: 15px; padding: 10px; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 5px; display: none;">
+                        <strong>✅ فرم با موفقیت ارسال شد!</strong>
+                    </div>
+                </div>
+
+                <h3>انواع input:</h3>
+                <ul>
+                    <li><strong>text:</strong> متن ساده</li>
+                    <li><strong>email:</strong> آدرس ایمیل</li>
+                    <li><strong>password:</strong> رمز عبور</li>
+                    <li><strong>number:</strong> عدد</li>
+                    <li><strong>checkbox:</strong> چک باکس</li>
+                    <li><strong>radio:</strong> دکمه رادیویی</li>
+                </ul>
+
+                <div class="tip">
+                    <strong>💡 نکته:</strong> همیشه از label برای فیلدهای فرم استفاده کنید تا دسترسی‌پذیری بهتر شود.
+                </div>
+
+                <div class="lesson-navigation">
+                    <button class="prev-lesson-btn" onclick="showLesson(5)">
+                        <span class="nav-arrow">→</span>
+                        درس قبلی: جداول
+                    </button>
+                    <button class="next-lesson-btn" onclick="showLesson(7)">
+                        درس بعدی: تگ‌های معنایی
+                        <span class="nav-arrow">←</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- درس 8: تگ‌های معنایی -->
+            <div class="lesson">
+                <h2>🎯 تگ‌های معنایی HTML5</h2>
+                <p>HTML5 تگ‌های جدیدی معرفی کرد که معنای بیشتری به محتوا می‌دهند:</p>
+
+                <div class="code-example">
+<span class="tag">&lt;header&gt;</span>
+    <span class="tag">&lt;nav&gt;</span>منوی ناوبری<span class="tag">&lt;/nav&gt;</span>
+<span class="tag">&lt;/header&gt;</span>
+
+<span class="tag">&lt;main&gt;</span>
+    <span class="tag">&lt;article&gt;</span>
+        <span class="tag">&lt;section&gt;</span>بخش مقاله<span class="tag">&lt;/section&gt;</span>
+    <span class="tag">&lt;/article&gt;</span>
+
+    <span class="tag">&lt;aside&gt;</span>نوار کناری<span class="tag">&lt;/aside&gt;</span>
+<span class="tag">&lt;/main&gt;</span>
+
+<span class="tag">&lt;footer&gt;</span>پاورقی صفحه<span class="tag">&lt;/footer&gt;</span>
+                </div>
+
+                <div class="live-demo">
+                    <h4>🎯 نمونه ساختار معنایی:</h4>
+                    <div style="border: 2px solid #4ecdc4; border-radius: 10px; overflow: hidden;">
+                        <div style="background: #4ecdc4; color: white; padding: 15px; text-align: center;">
+                            <strong>Header - سربرگ</strong>
+                        </div>
+                        <div style="display: flex; min-height: 200px;">
+                            <div style="flex: 1; padding: 20px; border-left: 1px solid #ddd;">
+                                <strong>Main Content</strong>
+                                <p>محتوای اصلی صفحه اینجا قرار می‌گیرد.</p>
+                            </div>
+                            <div style="width: 200px; background: #f8f9fa; padding: 20px;">
+                                <strong>Aside</strong>
+                                <p>نوار کناری</p>
+                            </div>
+                        </div>
+                        <div style="background: #6c757d; color: white; padding: 15px; text-align: center;">
+                            <strong>Footer - پاورقی</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>مزایای تگ‌های معنایی:</h3>
+                <ul>
+                    <li>🔍 <strong>SEO بهتر:</strong> موتورهای جستجو بهتر می‌فهمند</li>
+                    <li>♿ <strong>دسترسی‌پذیری:</strong> برای افراد نابینا مفیدتر است</li>
+                    <li>🧹 <strong>کد تمیزتر:</strong> ساختار واضح‌تری دارد</li>
+                    <li>🤖 <strong>خوانایی ماشین:</strong> برای ربات‌ها قابل فهم‌تر است</li>
+                </ul>
+
+                <div class="exercise">
+                    <h4>🎉 تبریک! دوره را تمام کردید</h4>
+                    <p>حالا می‌تونید یک صفحه کامل HTML بسازید. تمرین نهایی: یک صفحه شخصی با تمام مفاهیم یادگرفته شده بسازید.</p>
+                    <button class="try-button" onclick="showCertificate()">دریافت گواهی 🏆</button>
+                </div>
+
+                <h3>مثال‌های کاربردی بیشتر:</h3>
+
+                <h4>1️⃣ صفحه رستوران:</h4>
+                <div class="code-example">
+<span class="tag">&lt;header&gt;</span>
+    <span class="tag">&lt;h1&gt;</span>رستوران سنتی<span class="tag">&lt;/h1&gt;</span>
+    <span class="tag">&lt;nav&gt;</span>
+        <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="value">"#menu"</span><span class="tag">&gt;</span>منو<span class="tag">&lt;/a&gt;</span>
+        <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="value">"#contact"</span><span class="tag">&gt;</span>تماس<span class="tag">&lt;/a&gt;</span>
+    <span class="tag">&lt;/nav&gt;</span>
+<span class="tag">&lt;/header&gt;</span>
+
+<span class="tag">&lt;section</span> <span class="attr">id</span>=<span class="value">"menu"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;h2&gt;</span>منوی غذا<span class="tag">&lt;/h2&gt;</span>
+    <span class="tag">&lt;table&gt;</span>
+        <span class="tag">&lt;tr&gt;</span>
+            <span class="tag">&lt;th&gt;</span>غذا<span class="tag">&lt;/th&gt;</span>
+            <span class="tag">&lt;th&gt;</span>قیمت<span class="tag">&lt;/th&gt;</span>
+        <span class="tag">&lt;/tr&gt;</span>
+        <span class="tag">&lt;tr&gt;</span>
+            <span class="tag">&lt;td&gt;</span>چلو کباب<span class="tag">&lt;/td&gt;</span>
+            <span class="tag">&lt;td&gt;</span>150,000 تومان<span class="tag">&lt;/td&gt;</span>
+        <span class="tag">&lt;/tr&gt;</span>
+    <span class="tag">&lt;/table&gt;</span>
+<span class="tag">&lt;/section&gt;</span>
+                </div>
+
+                <h4>2️⃣ فرم ثبت‌نام:</h4>
+                <div class="code-example">
+<span class="tag">&lt;form&gt;</span>
+    <span class="tag">&lt;fieldset&gt;</span>
+        <span class="tag">&lt;legend&gt;</span>اطلاعات شخصی<span class="tag">&lt;/legend&gt;</span>
+
+        <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="value">"fname"</span><span class="tag">&gt;</span>نام:<span class="tag">&lt;/label&gt;</span>
+        <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="value">"text"</span> <span class="attr">id</span>=<span class="value">"fname"</span> <span class="attr">required</span><span class="tag">&gt;</span>
+
+        <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="value">"age"</span><span class="tag">&gt;</span>سن:<span class="tag">&lt;/label&gt;</span>
+        <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="value">"number"</span> <span class="attr">id</span>=<span class="value">"age"</span> <span class="attr">min</span>=<span class="value">"18"</span> <span class="attr">max</span>=<span class="value">"100"</span><span class="tag">&gt;</span>
+
+        <span class="tag">&lt;label&gt;</span>جنسیت:<span class="tag">&lt;/label&gt;</span>
+        <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="value">"radio"</span> <span class="attr">name</span>=<span class="value">"gender"</span> <span class="attr">value</span>=<span class="value">"male"</span><span class="tag">&gt;</span> مرد
+        <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="value">"radio"</span> <span class="attr">name</span>=<span class="value">"gender"</span> <span class="attr">value</span>=<span class="value">"female"</span><span class="tag">&gt;</span> زن
+    <span class="tag">&lt;/fieldset&gt;</span>
+
+    <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="value">"submit"</span><span class="tag">&gt;</span>ثبت‌نام<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;/form&gt;</span>
+                </div>
+
+                <h4>3️⃣ مقاله وبلاگ:</h4>
+                <div class="code-example">
+<span class="tag">&lt;article&gt;</span>
+    <span class="tag">&lt;header&gt;</span>
+        <span class="tag">&lt;h1&gt;</span>آموزش HTML<span class="tag">&lt;/h1&gt;</span>
+        <span class="tag">&lt;time</span> <span class="attr">datetime</span>=<span class="value">"2024-01-15"</span><span class="tag">&gt;</span>15 ژانویه 2024<span class="tag">&lt;/time&gt;</span>
+        <span class="tag">&lt;address&gt;</span>نویسنده: <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="value">"mailto:author@example.com"</span><span class="tag">&gt;</span>علی احمدی<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/address&gt;</span>
+    <span class="tag">&lt;/header&gt;</span>
+
+    <span class="tag">&lt;section&gt;</span>
+        <span class="tag">&lt;h2&gt;</span>مقدمه<span class="tag">&lt;/h2&gt;</span>
+        <span class="tag">&lt;p&gt;</span>HTML زبان اصلی وب است...<span class="tag">&lt;/p&gt;</span>
+
+        <span class="tag">&lt;blockquote</span> <span class="attr">cite</span>=<span class="value">"https://www.w3.org"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;p&gt;</span>وب برای همه ساخته شده است.<span class="tag">&lt;/p&gt;</span>
+            <span class="tag">&lt;footer&gt;</span>— <span class="tag">&lt;cite&gt;</span>تیم برنرز لی<span class="tag">&lt;/cite&gt;</span><span class="tag">&lt;/footer&gt;</span>
+        <span class="tag">&lt;/blockquote&gt;</span>
+    <span class="tag">&lt;/section&gt;</span>
+
+    <span class="tag">&lt;footer&gt;</span>
+        <span class="tag">&lt;p&gt;</span>برچسب‌ها:
+            <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="value">"#html"</span><span class="tag">&gt;</span>#HTML<span class="tag">&lt;/a&gt;</span>
+            <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="value">"#آموزش"</span><span class="tag">&gt;</span>#آموزش<span class="tag">&lt;/a&gt;</span>
+        <span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/footer&gt;</span>
+<span class="tag">&lt;/article&gt;</span>
+                </div>
+
+                <div class="live-demo">
+                    <h4>🎯 نمونه کامل - کارت معرفی:</h4>
+                    <div style="max-width: 400px; border: 2px solid #4ecdc4; border-radius: 15px; padding: 20px; background: linear-gradient(135deg, #f8f9fa, #ffffff);">
+                        <header style="text-align: center; margin-bottom: 20px;">
+                            <div style="width: 80px; height: 80px; background: #4ecdc4; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white;">👨‍💻</div>
+                            <h2 style="margin: 0; color: #2c3e50;">علیرضا یاقوتی</h2>
+                            <p style="margin: 5px 0; color: #666;">توسعه‌دهنده فرانت‌اند</p>
+                        </header>
+
+                        <section>
+                            <h3 style="color: #4ecdc4; font-size: 1.1rem; margin: 15px 0 10px;">مهارت‌ها:</h3>
+                            <ul style="list-style: none; padding: 0;">
+                                <li style="background: linear-gradient(135deg, #4ecdc4, #44a08d); color: white; padding: 8px; margin: 5px 0; border-radius: 5px;">✅ HTML5 & CSS3</li>
+                                <li style="background: linear-gradient(135deg, #ff6b6b, #e55353); color: white; padding: 8px; margin: 5px 0; border-radius: 5px;">✅ JavaScript</li>
+                                <li style="background: linear-gradient(135deg, #7b68ee, #6a5acd); color: white; padding: 8px; margin: 5px 0; border-radius: 5px;">✅ React</li>
+                            </ul>
+                        </section>
+
+                        <footer style="text-align: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid #ddd;">
+                            <a href="mailto:ali@example.com" style="color: #4ecdc4; text-decoration: none; margin: 0 10px;">📧</a>
+                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" style="color: #4ecdc4; text-decoration: none; margin: 0 10px;">🐙</a>
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style="color: #4ecdc4; text-decoration: none; margin: 0 10px;">💼</a>
+                        </footer>
+                    </div>
+                </div>
+
+                <div class="lesson-navigation">
+                    <button class="prev-lesson-btn" onclick="showLesson(6)">
+                        <span class="nav-arrow">→</span>
+                        درس قبلی: فرم‌ها
+                    </button>
+                    <button class="completion-btn" onclick="showCertificate()">
+                        🏆 دریافت گواهی تکمیل دوره
+                        <span class="nav-arrow">🎉</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificate Modal -->
+    <div id="certificateModal" class="certificate-modal">
+        <div class="certificate-content">
+            <span class="close-certificate" onclick="closeCertificate()">&times;</span>
+            <div class="certificate">
+                <div class="certificate-border">
+                    <div class="certificate-header">
+                        <div class="certificate-logo">
+                            <svg width="60" height="60" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" fill="#4ecdc4" stroke="#fff" stroke-width="3"/>
+                                <path d="M30 50 L45 65 L70 35" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h1 class="certificate-title">Certificate of Completion</h1>
+                        <div class="certificate-subtitle">HTML Fundamentals Course</div>
+                    </div>
+
+                    <div class="certificate-body">
+                        <div class="certificate-text">This is to certify that</div>
+                        <div class="certificate-name" id="studentName">Student Name</div>
+                        <div class="certificate-text">has successfully completed the comprehensive</div>
+                        <div class="certificate-course">HTML Programming Course</div>
+                        <div class="certificate-description">
+                            Demonstrating proficiency in HTML structure, semantic elements,<br>
+                            forms, tables, and modern web development practices
+                        </div>
+
+                        <div class="certificate-skills">
+                            <div class="skill-item">✓ HTML5 Structure & Semantics</div>
+                            <div class="skill-item">✓ Forms & Input Elements</div>
+                            <div class="skill-item">✓ Tables & Lists</div>
+                            <div class="skill-item">✓ Links & Media Integration</div>
+                        </div>
+
+                        <div class="certificate-footer">
+                            <div class="certificate-date">
+                                <div class="date-label">Date of Completion</div>
+                                <div class="date-value" id="completionDate"></div>
+                            </div>
+                            <div class="certificate-signature">
+                                <div class="signature-line"></div>
+                                <div class="signature-text">Canva Code Instructor</div>
+                            </div>
+                        </div>
+
+                        <div class="certificate-id">Certificate ID: HTML-2024-<span id="certId"></span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="certificate-actions">
+                <button class="cert-button download-btn" onclick="downloadCertificate()">📥 Download Certificate</button>
+                <button class="cert-button print-btn" onclick="printCertificate()">🖨️ Print Certificate</button>
+                <button class="cert-button share-btn" onclick="shareCertificate()">📤 Share Achievement</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .certificate-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .certificate-content {
+            position: relative;
+            margin: 2% auto;
+            width: 90%;
+            max-width: 800px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: certificateSlideIn 0.5s ease-out;
+        }
+
+        @keyframes certificateSlideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-certificate {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 35px;
+            font-weight: bold;
+            color: #666;
+            cursor: pointer;
+            z-index: 1001;
+            transition: color 0.3s;
+        }
+
+        .close-certificate:hover {
+            color: #ff6b6b;
+        }
+
+        .certificate {
+            padding: 40px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(78, 205, 196, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 107, 107, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .certificate-border {
+            border: 8px solid;
+            border-image: linear-gradient(45deg, #4ecdc4, #ff6b6b, #4ecdc4) 1;
+            padding: 40px;
+            position: relative;
+            background: white;
+            border-radius: 15px;
+        }
+
+        .certificate-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .certificate-logo {
+            margin-bottom: 20px;
+        }
+
+        .certificate-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .certificate-subtitle {
+            font-size: 1.2rem;
+            color: #4ecdc4;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .certificate-body {
+            text-align: center;
+        }
+
+        .certificate-text {
+            font-size: 1.1rem;
+            color: #666;
+            margin: 15px 0;
+        }
+
+        .certificate-name {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 25px 0;
+            padding: 15px;
+            border-bottom: 3px solid #4ecdc4;
+            display: inline-block;
+            min-width: 300px;
+        }
+
+        .certificate-course {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin: 25px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .certificate-description {
+            font-size: 1rem;
+            color: #666;
+            margin: 30px 0;
+            line-height: 1.6;
+        }
+
+        .certificate-skills {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 30px 0;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .skill-item {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .certificate-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .certificate-date {
+            text-align: left;
+        }
+
+        .date-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .date-value {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .certificate-signature {
+            text-align: right;
+        }
+
+        .signature-line {
+            width: 200px;
+            height: 2px;
+            background: #4ecdc4;
+            margin-bottom: 5px;
+        }
+
+        .signature-text {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .certificate-id {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #999;
+            font-family: 'Courier New', monospace;
+        }
+
+        .certificate-actions {
+            padding: 30px;
+            text-align: center;
+            background: #f8f9fa;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .cert-button {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            margin: 0 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cert-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+        }
+
+        .download-btn { background: linear-gradient(45deg, #28a745, #20c997); }
+        .print-btn { background: linear-gradient(45deg, #17a2b8, #6f42c1); }
+        .share-btn { background: linear-gradient(45deg, #fd7e14, #e83e8c); }
+
+        @media (max-width: 768px) {
+            .certificate-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+
+            .certificate {
+                padding: 20px;
+            }
+
+            .certificate-border {
+                padding: 20px;
+            }
+
+            .certificate-title {
+                font-size: 1.8rem;
+            }
+
+            .certificate-name {
+                font-size: 1.6rem;
+                min-width: 250px;
+            }
+
+            .certificate-course {
+                font-size: 1.4rem;
+            }
+
+            .certificate-skills {
+                grid-template-columns: 1fr;
+            }
+
+            .certificate-footer {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .signature-line {
+                margin: 0 auto;
+            }
+
+            .cert-button {
+                display: block;
+                margin: 10px auto;
+                width: 200px;
+            }
+        }
+    </style>
+
+    <script>
+        let currentLesson = 0;
+        const totalLessons = 8;
+
+        function showLesson(lessonIndex) {
+            // پنهان کردن همه درس‌ها
+            const lessons = document.querySelectorAll('.lesson');
+            lessons.forEach(lesson => lesson.classList.remove('active'));
+
+            // نمایش درس انتخاب شده با انیمیشن
+            setTimeout(() => {
+                lessons[lessonIndex].classList.add('active');
+            }, 100);
+
+            // به‌روزرسانی تب‌ها
+            const tabs = document.querySelectorAll('.tab-button');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            tabs[lessonIndex].classList.add('active');
+
+            // به‌روزرسانی نوار پیشرفت
+            currentLesson = lessonIndex;
+            updateProgress();
+            saveProgress();
+
+            // اسکرول به بالا
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Add completion effect
+            if (lessonIndex === totalLessons - 1) {
+                setTimeout(() => {
+                    showCompletionEffect();
+                }, 1000);
+            }
+        }
+
+        function showCompletionEffect() {
+            // Create celebration particles
+            for (let i = 0; i < 50; i++) {
+                createParticle();
+            }
+        }
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: fixed;
+                width: 10px;
+                height: 10px;
+                background: linear-gradient(45deg, #4ecdc4, #ff6b6b);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                left: ${Math.random() * window.innerWidth}px;
+                top: ${Math.random() * window.innerHeight}px;
+                animation: particleFloat 3s ease-out forwards;
+            `;
+
+            document.body.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 3000);
+        }
+
+        // Add particle animation
+        const particleStyle = document.createElement('style');
+        particleStyle.textContent = `
+            @keyframes particleFloat {
+                0% {
+                    transform: translateY(0) scale(1);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-200px) scale(0);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(particleStyle);
+
+        function updateProgress() {
+            const progress = ((currentLesson + 1) / totalLessons) * 100;
+            const progressBar = document.getElementById('progressBar');
+
+            // Advanced progress animation with easing
+            progressBar.style.transition = 'width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            progressBar.style.width = progress + '%';
+
+            // Update text with Persian numbers
+            const persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+            const currentPersian = (currentLesson + 1).toString().split('').map(d => persianNumbers[d]).join('');
+            const totalPersian = totalLessons.toString().split('').map(d => persianNumbers[d]).join('');
+            const progressPersian = Math.round(progress).toString().split('').map(d => persianNumbers[d]).join('');
+
+            document.getElementById('progressText').textContent = `درس ${currentPersian} از ${totalPersian}`;
+            document.getElementById('progressPercent').textContent = `${progressPersian}٪`;
+
+            // Update time spent
+            const timeSpent = getTotalTimeSpent();
+            const timeSpentPersian = timeSpent.toString().split('').map(d => persianNumbers[d]).join('');
+            document.getElementById('timeSpent').textContent = `${timeSpentPersian} دقیقه`;
+
+            // Advanced stats animation with stagger effect
+            setTimeout(() => animateNumber('lessonCount', currentLesson + 1), 100);
+            setTimeout(() => animateNumber('exampleCount', Math.min(25 + (currentLesson * 3), 50)), 200);
+            setTimeout(() => animateNumber('timeEstimate', Math.max(3 - Math.floor(currentLesson / 3), 1)), 300);
+
+            // Add progress particles
+            createProgressParticles();
+
+            // Add completion percentage to localStorage with timestamp
+            const progressData = {
+                lesson: currentLesson,
+                percentage: progress,
+                timestamp: Date.now(),
+                completedLessons: Array.from({length: currentLesson + 1}, (_, i) => i),
+                totalTimeSpent: timeSpent
+            };
+            localStorage.setItem('htmlTutorialProgressAdvanced', JSON.stringify(progressData));
+
+            // Trigger achievement notifications
+            checkAchievements(progress);
+        }
+
+        function createProgressParticles() {
+            const container = document.getElementById('progressParticles');
+
+            // Clear existing particles
+            container.innerHTML = '';
+
+            // Create new particles based on progress
+            const particleCount = Math.floor((currentLesson + 1) * 2);
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'progress-particle';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 4 + 's';
+                particle.style.animationDuration = (3 + Math.random() * 2) + 's';
+
+                // Random colors
+                const colors = ['#4ecdc4', '#ff6b6b', '#7b68ee', '#44a08d', '#e55353'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+                container.appendChild(particle);
+            }
+        }
+
+        function animateNumber(elementId, targetNumber) {
+            const element = document.getElementById(elementId);
+            const startNumber = parseInt(element.textContent) || 0;
+            const duration = 800;
+            const startTime = performance.now();
+
+            function animate(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Advanced easing function (elastic out)
+                const easeElasticOut = (t) => {
+                    const c4 = (2 * Math.PI) / 3;
+                    return t === 0 ? 0 : t === 1 ? 1 : Math.pow(2, -10 * t) * Math.sin((t * 10 - 0.75) * c4) + 1;
+                };
+
+                const easedProgress = easeElasticOut(progress);
+                const currentNumber = Math.floor(startNumber + (targetNumber - startNumber) * easedProgress);
+
+                // Add Persian number formatting
+                const persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+                const persianNumber = currentNumber.toString().split('').map(d => persianNumbers[d] || d).join('');
+
+                if (elementId === 'exampleCount') {
+                    element.textContent = persianNumber + '+';
+                } else {
+                    element.textContent = persianNumber;
+                }
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        function getTotalTimeSpent() {
+            const startTime = localStorage.getItem('htmlTutorialStartTime');
+            if (!startTime) {
+                localStorage.setItem('htmlTutorialStartTime', Date.now());
+                return 0;
+            }
+            return Math.floor((Date.now() - parseInt(startTime)) / 1000 / 60); // minutes
+        }
+
+        function checkAchievements(progress) {
+            const achievements = [
+                { id: 'first_lesson', threshold: 12.5, title: '🎯 اولین قدم', message: 'درس اول را تکمیل کردید!' },
+                { id: 'quarter_complete', threshold: 25, title: '🚀 یک چهارم مسیر', message: '۲۵٪ دوره تکمیل شد!' },
+                { id: 'half_complete', threshold: 50, title: '⭐ نیمه راه', message: '۵۰٪ دوره تکمیل شد!' },
+                { id: 'three_quarter', threshold: 75, title: '🔥 تقریباً تمام', message: '۷۵٪ دوره تکمیل شد!' },
+                { id: 'complete', threshold: 100, title: '🏆 تبریک!', message: 'دوره کاملاً تکمیل شد!' }
+            ];
+
+            const unlockedAchievements = JSON.parse(localStorage.getItem('htmlAchievements') || '[]');
+
+            achievements.forEach(achievement => {
+                if (progress >= achievement.threshold && !unlockedAchievements.includes(achievement.id)) {
+                    unlockedAchievements.push(achievement.id);
+                    localStorage.setItem('htmlAchievements', JSON.stringify(unlockedAchievements));
+                    showAchievementNotification(achievement);
+                }
+            });
+        }
+
+        function showAchievementNotification(achievement) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                background: linear-gradient(135deg, #4ecdc4, #44a08d);
+                color: white;
+                padding: 20px 25px;
+                border-radius: 15px;
+                box-shadow: 0 15px 35px rgba(78, 205, 196, 0.4);
+                z-index: 1000;
+                animation: achievementSlideIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                cursor: pointer;
+                max-width: 300px;
+                font-family: 'Vazirmatn', sans-serif;
+            `;
+
+            notification.innerHTML = `
+                <div style="font-weight: 700; font-size: 1.1rem; margin-bottom: 8px;">${achievement.title}</div>
+                <div style="font-size: 0.9rem; opacity: 0.95; line-height: 1.4;">${achievement.message}</div>
+                <div style="position: absolute; top: -5px; right: -5px; width: 20px; height: 20px; background: #ff6b6b; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">🎉</div>
+            `;
+
+            notification.onclick = () => {
+                notification.style.animation = 'achievementSlideOut 0.4s ease forwards';
+                setTimeout(() => notification.remove(), 400);
+            };
+
+            document.body.appendChild(notification);
+
+            // Auto remove after 6 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.animation = 'achievementSlideOut 0.4s ease forwards';
+                    setTimeout(() => notification.remove(), 400);
+                }
+            }, 6000);
+        }
+
+        function toggleFeatures() {
+            const features = document.getElementById('htmlFeatures');
+            if (features.style.display === 'none') {
+                features.style.display = 'block';
+                features.style.animation = 'fadeIn 0.5s ease';
+            } else {
+                features.style.display = 'none';
+            }
+        }
+
+
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft' && currentLesson > 0) {
+                showLesson(currentLesson - 1);
+            } else if (e.key === 'ArrowRight' && currentLesson < totalLessons - 1) {
+                showLesson(currentLesson + 1);
+            }
+        });
+
+        // Mobile touch/swipe navigation
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const verticalThreshold = 100;
+
+            const horizontalDistance = touchEndX - touchStartX;
+            const verticalDistance = Math.abs(touchEndY - touchStartY);
+
+            // Only trigger swipe if horizontal movement is greater than vertical
+            if (Math.abs(horizontalDistance) > swipeThreshold && verticalDistance < verticalThreshold) {
+                if (horizontalDistance > 0 && currentLesson > 0) {
+                    // Swipe right - go to previous lesson
+                    showLesson(currentLesson - 1);
+                    showSwipeIndicator('→ درس قبلی');
+                } else if (horizontalDistance < 0 && currentLesson < totalLessons - 1) {
+                    // Swipe left - go to next lesson
+                    showLesson(currentLesson + 1);
+                    showSwipeIndicator('درس بعدی ←');
+                }
+            }
+        }
+
+        function showSwipeIndicator(text) {
+            const indicator = document.createElement('div');
+            indicator.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: linear-gradient(135deg, #4ecdc4, #44a08d);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 25px;
+                font-size: 1rem;
+                font-weight: 600;
+                z-index: 1000;
+                animation: swipeIndicatorShow 0.6s ease;
+                pointer-events: none;
+                box-shadow: 0 10px 30px rgba(78, 205, 196, 0.4);
+                font-family: 'Vazirmatn', sans-serif;
+            `;
+            indicator.textContent = text;
+
+            document.body.appendChild(indicator);
+
+            setTimeout(() => {
+                indicator.style.animation = 'swipeIndicatorHide 0.4s ease forwards';
+                setTimeout(() => indicator.remove(), 400);
+            }, 1200);
+        }
+
+        // Auto-save progress
+        function saveProgress() {
+            localStorage.setItem('htmlTutorialProgress', currentLesson);
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('htmlTutorialProgress');
+            if (saved !== null) {
+                const lessonIndex = parseInt(saved);
+                if (lessonIndex >= 0 && lessonIndex < totalLessons) {
+                    showLesson(lessonIndex);
+                }
+            }
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const result = document.getElementById('formResult');
+            result.style.display = 'block';
+
+            setTimeout(() => {
+                result.style.display = 'none';
+            }, 3000);
+        }
+
+        function showCertificate() {
+            // درخواست نام دانشجو
+            const studentName = prompt('لطفاً نام خود را وارد کنید:') || 'دانشجوی عزیز';
+
+            // تنظیم اطلاعات گواهی
+            document.getElementById('studentName').textContent = studentName;
+            document.getElementById('completionDate').textContent = new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('certId').textContent = Math.random().toString(36).substr(2, 9).toUpperCase();
+
+            // نمایش گواهی
+            document.getElementById('certificateModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCertificate() {
+            document.getElementById('certificateModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function downloadCertificate() {
+            // شبیه‌سازی دانلود
+            const link = document.createElement('a');
+            link.download = 'HTML_Certificate.pdf';
+            link.href = '#';
+
+            // نمایش پیام موفقیت
+            alert('🎉 گواهی شما آماده دانلود است!\n\n📄 فایل: HTML_Certificate.pdf\n📅 تاریخ: ' + new Date().toLocaleDateString('fa-IR') + '\n\n💡 نکته: این یک نمونه آموزشی است. در محیط واقعی، فایل PDF واقعی دانلود می‌شود.');
+        }
+
+        function printCertificate() {
+            // پنهان کردن دکمه‌ها برای چاپ
+            const actions = document.querySelector('.certificate-actions');
+            const closeBtn = document.querySelector('.close-certificate');
+
+            actions.style.display = 'none';
+            closeBtn.style.display = 'none';
+
+            // چاپ
+            window.print();
+
+            // نمایش مجدد دکمه‌ها
+            setTimeout(() => {
+                actions.style.display = 'block';
+                closeBtn.style.display = 'block';
+            }, 1000);
+        }
+
+        function shareCertificate() {
+            const studentName = document.getElementById('studentName').textContent;
+            const shareText = `🎉 I just completed the HTML Fundamentals Course!\n\n✅ HTML5 Structure & Semantics\n✅ Forms & Input Elements\n✅ Tables & Lists\n✅ Links & Media Integration\n\n#HTML #WebDevelopment #Learning #CanvaCode`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'HTML Certificate Achievement',
+                    text: shareText,
+                    url: window.location.href
+                });
+            } else {
+                // کپی در کلیپ‌بورد
+                navigator.clipboard.writeText(shareText).then(() => {
+                    alert('🎉 متن برای اشتراک‌گذاری کپی شد!\n\nحالا می‌تونید در شبکه‌های اجتماعی پیست کنید:\n\n' + shareText);
+                });
+            }
+        }
+
+        // بستن گواهی با کلیک خارج از آن
+        window.onclick = function(event) {
+            const modal = document.getElementById('certificateModal');
+            if (event.target === modal) {
+                closeCertificate();
+            }
+        }
+
+        // Initialize tutorial
+        function initTutorial() {
+            updateProgress();
+            loadProgress();
+
+            // Add welcome message
+            setTimeout(() => {
+                if (currentLesson === 0) {
+                    showWelcomeMessage();
+                }
+            }, 1000);
+        }
+
+        function showWelcomeMessage() {
+            const isMobile = window.innerWidth <= 768;
+            const welcome = document.createElement('div');
+
+            welcome.style.cssText = `
+                position: fixed;
+                ${isMobile ? 'top: 10px; left: 10px; right: 10px;' : 'top: 20px; right: 20px;'}
+                background: linear-gradient(135deg, #4ecdc4, #44a08d);
+                color: white;
+                padding: ${isMobile ? '20px' : '15px 25px'};
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(78, 205, 196, 0.3);
+                z-index: 1000;
+                animation: ${isMobile ? 'slideInTop' : 'slideInRight'} 0.5s ease;
+                cursor: pointer;
+                text-align: ${isMobile ? 'center' : 'right'};
+                font-family: 'Vazirmatn', sans-serif;
+            `;
+
+            if (isMobile) {
+                welcome.innerHTML = `
+                    <div style="font-weight: 600; margin-bottom: 8px; font-size: 1.1rem;">🎉 خوش آمدید!</div>
+                    <div style="font-size: 0.95rem; opacity: 0.9; line-height: 1.4;">
+                        👆 روی تب‌ها کلیک کنید یا صفحه را swipe کنید<br>
+                        📱 برای ناوبری بین درس‌ها
+                    </div>
+                `;
+            } else {
+                welcome.innerHTML = `
+                    <div style="font-weight: 600; margin-bottom: 5px;">🎉 خوش آمدید!</div>
+                    <div style="font-size: 0.9rem; opacity: 0.9;">از کلیدهای ← → برای ناوبری استفاده کنید</div>
+                `;
+            }
+
+            welcome.onclick = () => welcome.remove();
+            document.body.appendChild(welcome);
+
+            setTimeout(() => {
+                if (welcome.parentNode) {
+                    welcome.style.animation = `${isMobile ? 'slideOutTop' : 'slideOutRight'} 0.5s ease forwards`;
+                    setTimeout(() => welcome.remove(), 500);
+                }
+            }, isMobile ? 6000 : 5000);
+        }
+
+        // Add slide animations
+        const slideStyle = document.createElement('style');
+        slideStyle.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOutRight {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            @keyframes achievementSlideIn {
+                from {
+                    transform: translateX(-100%) scale(0.8);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0) scale(1);
+                    opacity: 1;
+                }
+            }
+            @keyframes achievementSlideOut {
+                from {
+                    transform: translateX(0) scale(1);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(-100%) scale(0.8);
+                    opacity: 0;
+                }
+            }
+            @keyframes swipeIndicatorShow {
+                0% {
+                    transform: translate(-50%, -50%) scale(0.5);
+                    opacity: 0;
+                }
+                50% {
+                    transform: translate(-50%, -50%) scale(1.1);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translate(-50%, -50%) scale(1);
+                    opacity: 1;
+                }
+            }
+            @keyframes swipeIndicatorHide {
+                from {
+                    transform: translate(-50%, -50%) scale(1);
+                    opacity: 1;
+                }
+                to {
+                    transform: translate(-50%, -50%) scale(0.8);
+                    opacity: 0;
+                }
+            }
+            @keyframes slideInTop {
+                from { transform: translateY(-100%); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+            @keyframes slideOutTop {
+                from { transform: translateY(0); opacity: 1; }
+                to { transform: translateY(-100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(slideStyle);
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initTutorial);
+
+        // Initialize immediately if DOM is already loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initTutorial);
+        } else {
+            initTutorial();
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98759042470b695d',t:'MTc1OTI1NDYzNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
